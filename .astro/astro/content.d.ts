@@ -766,6 +766,13 @@ declare module 'astro:content' {
   collection: "events";
   data: InferEntrySchema<"events">
 } & { render(): Render[".md"] };
+"waipu-highland-games.md": {
+	id: "waipu-highland-games.md";
+  slug: "waipu-highland-games";
+  body: string;
+  collection: "events";
+  data: InferEntrySchema<"events">
+} & { render(): Render[".md"] };
 };
 "explore": Record<string, {
   id: string;
