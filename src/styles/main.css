@@ -63,36 +63,51 @@ a:hover { color: var(--pw-green-dark); }
 
 /* ── Navbar ────────────────────────────────────────────────────────────── */
 .site-navbar {
-  border-bottom: 2px solid var(--pw-green-pale);
+  background-color: var(--pw-green-dark);
+  border-bottom: 3px solid var(--pw-green-mid);
 }
 .site-navbar .navbar-brand img {
   height: 48px;
   width: auto;
 }
+.site-navbar .navbar-toggler {
+  border-color: rgba(255,255,255,0.4);
+}
+.site-navbar .navbar-toggler-icon {
+  filter: invert(1);
+}
 .site-navbar .nav-link {
   font-weight: 500;
-  color: #333;
+  color: rgba(255,255,255,0.85);
 }
 .site-navbar .nav-link:hover,
 .site-navbar .nav-link.active {
-  color: var(--pw-green);
+  color: #fff;
+}
+.site-navbar .dropdown-menu {
+  background-color: var(--pw-green-dark);
+  border: 1px solid var(--pw-green-mid);
+}
+.site-navbar .dropdown-item {
+  color: rgba(255,255,255,0.85);
 }
 .site-navbar .dropdown-item:hover,
 .site-navbar .dropdown-item:focus {
-  background-color: var(--pw-green-pale);
-  color: var(--pw-green-dark);
+  background-color: var(--pw-green);
+  color: #fff;
 }
 .btn-join {
-  background-color: var(--pw-green);
-  border-color: var(--pw-green);
-  color: #fff !important;
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--pw-green-dark) !important;
   border-radius: 20px;
   padding: 0.35rem 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 .btn-join:hover {
-  background-color: var(--pw-green-dark);
-  border-color: var(--pw-green-dark);
+  background-color: var(--pw-green-pale);
+  border-color: var(--pw-green-pale);
+  color: var(--pw-green-dark) !important;
 }
 
 /* ── Hero (home) ───────────────────────────────────────────────────────── */
