@@ -1,0 +1,132 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Contact Us"
+  description="Get in touch with Promote Waipu — Waipu's community and business promotion group."
+>
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="fw-bold">Contact Us</h1>
+      <p>We'd love to hear from you</p>
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-5">
+
+      <!-- CONTACT DETAILS -->
+      <div class="col-md-5">
+        <h2 class="section-title h4">Get in Touch</h2>
+        <p class="text-muted">
+          Promote Waipu is run by a volunteer committee. We'll do our best to
+          get back to you as quickly as possible.
+        </p>
+
+        <ul class="contact-list mt-4">
+          <li>
+            <p class="mb-0 fw-semibold">General enquiries</p>
+            <a href="mailto:hello@promotewaipu.co.nz">hello@promotewaipu.co.nz</a>
+          </li>
+          <li>
+            <p class="mb-0 fw-semibold">Secretary</p>
+            <a href="mailto:secretary@promotewaipu.co.nz">secretary@promotewaipu.co.nz</a>
+          </li>
+          <li>
+            <p class="mb-0 fw-semibold">Follow us</p>
+            <a href="https://www.facebook.com/PromoteWaipu" target="_blank" rel="noopener">
+              <i class="bi bi-facebook me-1"></i>Facebook — @PromoteWaipu
+            </a>
+          </li>
+        </ul>
+
+        <div class="card border-0 bg-sand mt-4 p-4 rounded-3">
+          <h5 class="fw-semibold mb-2">Business &amp; Membership</h5>
+          <p class="small mb-2">Want to add your business or become a member?</p>
+          <a href="/directory/add" class="btn btn-outline-primary btn-sm mb-2">
+            <i class="bi bi-plus-circle me-1"></i> Add a business listing
+          </a>
+          <a href="/join" class="btn btn-primary btn-sm">
+            <i class="bi bi-people me-1"></i> Join Promote Waipu
+          </a>
+        </div>
+      </div>
+
+      <!-- ENQUIRY FORM -->
+      <div class="col-md-7">
+        <h2 class="section-title h4">Send us a Message</h2>
+        <!--
+          Replace YOUR_FORM_ID with your Formspree form ID.
+          Sign up free at https://formspree.io
+        -->
+        <form
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+          class="needs-validation"
+          id="contact-form"
+        >
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="name" class="form-label">
+                Your Name <span class="required-star">*</span>
+              </label>
+              <input type="text" id="name" name="name"
+                     class="form-control" required autocomplete="name" />
+            </div>
+            <div class="col-sm-6">
+              <label for="email" class="form-label">
+                Email Address <span class="required-star">*</span>
+              </label>
+              <input type="email" id="email" name="email"
+                     class="form-control" required autocomplete="email" />
+            </div>
+            <div class="col-sm-6">
+              <label for="phone" class="form-label">Phone (optional)</label>
+              <input type="tel" id="phone" name="phone"
+                     class="form-control" autocomplete="tel" />
+            </div>
+            <div class="col-sm-6">
+              <label for="subject" class="form-label">
+                Subject <span class="required-star">*</span>
+              </label>
+              <select id="subject" name="subject" class="form-select" required>
+                <option value="">— Please select —</option>
+                <option>General enquiry</option>
+                <option>Event information</option>
+                <option>Membership</option>
+                <option>Business listing</option>
+                <option>Volunteering</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label for="message" class="form-label">
+                Message <span class="required-star">*</span>
+              </label>
+              <textarea id="message" name="message"
+                        class="form-control" rows="6" required></textarea>
+            </div>
+          </div>
+
+          <!-- Honeypot spam protection -->
+          <input type="text" name="_gotcha" style="display:none" />
+          <input type="hidden" name="_next"
+                 value="https://www.promotewaipu.co.nz/thank-you" />
+
+          <div class="mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="bi bi-send me-1"></i> Send Message
+            </button>
+          </div>
+          <p class="form-note">
+            <span class="required-star">*</span> Required fields.
+            We respect your privacy and will never share your details.
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</Base>

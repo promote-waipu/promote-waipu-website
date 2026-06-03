@@ -1,0 +1,178 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const events = await getCollection('events');
+const upcomingEvents = events
+  .filter(e => e.data.published && new Date(e.data.date) >= new Date())
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime())
+  .slice(0, 3);
+---
+
+<Base
+  title="Waipu, Northland New Zealand — Things to Do, Eat, Stay & Explore"
+  description="Promote Waipu is a non-profit community group promoting the beautiful coastal town of Waipu, Northland, New Zealand. Discover events, local businesses, beaches and more."
+>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="/images/hero-waipu-cove.jpg"
+         alt="Waipu Cove beach, Northland New Zealand"
+         class="hero-bg" />
+    <div class="hero-overlay"></div>
+    <div class="container hero-content py-5">
+      <div class="row align-items-center" style="min-height: 480px">
+        <div class="col-lg-7 text-white py-5">
+          <p class="text-uppercase fw-semibold mb-2 opacity-75" style="letter-spacing:.1em; font-size:.85rem">
+            Waipu, Northland, New Zealand
+          </p>
+          <h1 class="display-3 fw-bold mb-3">Welcome to Waipu</h1>
+          <p class="lead mb-4 opacity-90">
+            90 minutes north of Auckland &middot; Stunning beaches &middot;
+            Rich Scottish heritage &middot; Community heart
+          </p>
+          <a href="/explore" class="btn btn-primary btn-lg me-2 mb-2">
+            <i class="bi bi-compass me-1"></i> Explore Waipu
+          </a>
+          <a href="/events" class="btn btn-outline-light btn-lg mb-2">
+            <i class="bi bi-calendar3 me-1"></i> Upcoming Events
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK LINKS -->
+  <section class="py-4 bg-white border-bottom">
+    <div class="container">
+      <div class="row row-cols-3 row-cols-sm-6 g-2">
+        <div class="col">
+          <a href="/directory?cat=Restaurants" class="quick-link-card">
+            <i class="bi bi-cup-hot-fill ql-icon"></i>
+            <span>Eat &amp; Drink</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="/stay" class="quick-link-card">
+            <i class="bi bi-house-heart-fill ql-icon"></i>
+            <span>Stay</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="/directory?cat=Gift+Shop" class="quick-link-card">
+            <i class="bi bi-bag-fill ql-icon"></i>
+            <span>Shop</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="/explore" class="quick-link-card">
+            <i class="bi bi-binoculars-fill ql-icon"></i>
+            <span>Explore</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="/events" class="quick-link-card">
+            <i class="bi bi-calendar-event-fill ql-icon"></i>
+            <span>Events</span>
+          </a>
+        </div>
+        <div class="col">
+          <a href="/directory" class="quick-link-card">
+            <i class="bi bi-grid-fill ql-icon"></i>
+            <span>Directory</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT WAIPU -->
+  <section class="py-5 bg-sand">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <h2 class="section-title">Discover Waipu</h2>
+          <p class="lead">
+            Just 90 minutes north of Auckland and 30 minutes south of Whangarei,
+            Waipu sits on one of the most stunning coastlines in New Zealand.
+          </p>
+          <p>
+            With its friendly community, iconic beaches, award-winning food and rich
+            Scottish heritage, Waipu is one of Northland's best kept secrets.
+            Home to the UNESCO-listed Waipu Museum, the famous glow worm caves, and
+            spectacular clifftop walking tracks.
+          </p>
+          <a href="/explore" class="btn btn-outline-primary">
+            Explore the Area <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <img src="/images/waipu-village.jpg"
+               alt="Waipu village, Northland New Zealand"
+               class="img-fluid rounded-3 shadow-sm" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING EVENTS -->
+  {upcomingEvents.length > 0 && (
+    <section class="py-5">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <h2 class="section-title mb-0">Upcoming Events</h2>
+          <a href="/events" class="btn btn-outline-primary btn-sm">All Events →</a>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          {upcomingEvents.map(event => (
+            <div class="col">
+              <a href={`/events/${event.slug}`} class="card h-100 shadow-sm event-card border-0">
+                {event.data.image && (
+                  <img src={event.data.image}
+                       alt={event.data.title}
+                       class="card-img-top event-card-img" />
+                )}
+                <div class="card-body">
+                  <p class="event-date mb-1">
+                    <i class="bi bi-calendar3 me-1"></i>
+                    {new Date(event.data.date).toLocaleDateString('en-NZ', {
+                      day: 'numeric', month: 'long', year: 'numeric'
+                    })}
+                  </p>
+                  <h5 class="card-title">{event.data.title}</h5>
+                  {event.data.description && (
+                    <p class="card-text text-muted small">{event.data.description}</p>
+                  )}
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0">
+                  <span class="text-primary small fw-semibold">
+                    View event <i class="bi bi-arrow-right"></i>
+                  </span>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA BAND -->
+  <section class="cta-band py-5">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-3">Love Waipu? So Do We.</h2>
+      <p class="lead mb-4" style="max-width:600px; margin:0 auto 1.5rem">
+        Promote Waipu is a non-profit community group. All proceeds from membership
+        go directly back into the Waipu community. Get your business listed —
+        basic listings are free.
+      </p>
+      <a href="/join" class="btn btn-light btn-lg fw-semibold me-2 mb-2">
+        <i class="bi bi-people-fill me-1"></i> Become a Member
+      </a>
+      <a href="/directory/add" class="btn btn-outline-light btn-lg mb-2">
+        <i class="bi bi-plus-circle me-1"></i> Add Your Business
+      </a>
+    </div>
+  </section>
+
+</Base>

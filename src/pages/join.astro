@@ -1,0 +1,190 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Join Promote Waipu"
+  description="Become a member of Promote Waipu and support the Waipu community. Business and community memberships available from $30."
+>
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="fw-bold">Join Promote Waipu</h1>
+      <p>Support the community — and get your business noticed</p>
+    </div>
+  </div>
+
+  <div class="container py-5">
+
+    <!-- WHY JOIN -->
+    <div class="row g-5 mb-5">
+      <div class="col-lg-6">
+        <h2 class="section-title h3">Why Join?</h2>
+        <p>
+          Promote Waipu is a non-profit group with all proceeds fed directly back
+          into the Waipu community. Our committee is made up of passionate business
+          people and local residents with a strong community spirit.
+        </p>
+        <p class="fw-semibold mb-2">Membership gives you:</p>
+        <ul class="list-group list-group-flush mb-4">
+          <li class="list-group-item border-0 ps-0">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            Invitations to social and networking events
+          </li>
+          <li class="list-group-item border-0 ps-0">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            A listing in our web directory
+          </li>
+          <li class="list-group-item border-0 ps-0">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            Inclusion in our printed visitor map
+          </li>
+          <li class="list-group-item border-0 ps-0">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            Opportunities to promote via newsletter &amp; social media
+          </li>
+          <li class="list-group-item border-0 ps-0">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            Ability to host an After 5 networking event
+          </li>
+          <li class="list-group-item border-0 ps-0">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            Your contribution supports community events
+          </li>
+        </ul>
+        <p class="text-muted small">
+          Questions? Email <a href="mailto:hello@promotewaipu.co.nz">hello@promotewaipu.co.nz</a>
+        </p>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-12">
+            <div class="tier-card">
+              <i class="bi bi-person-fill text-primary fs-3 mb-2 d-block"></i>
+              <h4>Community Member</h4>
+              <p class="tier-price mb-2">$30 <small>incl. GST / year</small></p>
+              <p class="text-muted small mb-0">
+                Annual membership. Invites to networking events.
+                Contributes to community events.
+              </p>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="tier-card tier-featured">
+              <i class="bi bi-building-fill text-primary fs-3 mb-2 d-block"></i>
+              <h4>Business Member</h4>
+              <p class="tier-price mb-2">$60 <small>incl. GST / year</small></p>
+              <p class="text-muted small mb-0">
+                Annual membership + full directory listing with logo, links and photos.
+              </p>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="tier-card">
+              <i class="bi bi-heart-fill text-primary fs-3 mb-2 d-block"></i>
+              <h4>Donation</h4>
+              <p class="tier-price mb-2"><small>Any amount</small></p>
+              <p class="text-muted small mb-0">
+                Support the community without a formal membership. Every bit helps.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBERSHIP FORM -->
+    <div class="card border-0 shadow-sm rounded-3 p-4 p-md-5">
+      <h2 class="section-title h3">Membership Application</h2>
+      <!--
+        Replace YOUR_JOIN_FORM_ID with your Formspree form ID.
+      -->
+      <form
+        action="https://formspree.io/f/YOUR_JOIN_FORM_ID"
+        method="POST"
+      >
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label for="name" class="form-label">
+              Full Name <span class="required-star">*</span>
+            </label>
+            <input type="text" id="name" name="name"
+                   class="form-control" required autocomplete="name" />
+          </div>
+          <div class="col-sm-6">
+            <label for="email" class="form-label">
+              Email Address <span class="required-star">*</span>
+            </label>
+            <input type="email" id="email" name="email"
+                   class="form-control" required autocomplete="email" />
+          </div>
+          <div class="col-sm-6">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" id="phone" name="phone"
+                   class="form-control" autocomplete="tel" />
+          </div>
+          <div class="col-sm-6">
+            <label for="membership_type" class="form-label">
+              Membership Type <span class="required-star">*</span>
+            </label>
+            <select id="membership_type" name="membership_type"
+                    class="form-select" required>
+              <option value="">— Select —</option>
+              <option>Community Member ($30)</option>
+              <option>Business Member ($60)</option>
+              <option>Donation (amount in message)</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label for="business_name" class="form-label">Business Name (if applicable)</label>
+            <input type="text" id="business_name" name="business_name" class="form-control" />
+          </div>
+          <div class="col-sm-6">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" id="address" name="address"
+                   class="form-control" autocomplete="street-address" />
+          </div>
+          <div class="col-sm-6">
+            <label for="gst" class="form-label">GST Number (business members)</label>
+            <input type="text" id="gst" name="gst_number" class="form-control" />
+          </div>
+          <div class="col-sm-6">
+            <label for="website" class="form-label">Website</label>
+            <input type="url" id="website" name="website"
+                   class="form-control" placeholder="https://" />
+          </div>
+          <div class="col-sm-6">
+            <label for="facebook" class="form-label">Facebook</label>
+            <input type="url" id="facebook" name="facebook"
+                   class="form-control" placeholder="https://facebook.com/..." />
+          </div>
+          <div class="col-12">
+            <label for="message" class="form-label">
+              Anything else you'd like to tell us?
+            </label>
+            <textarea id="message" name="message"
+                      class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+
+        <input type="text" name="_gotcha" style="display:none" />
+        <input type="hidden" name="_next"
+               value="https://www.promotewaipu.co.nz/thank-you?from=join" />
+        <input type="hidden" name="_subject"
+               value="New membership application — Promote Waipu" />
+
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-send me-1"></i> Submit Application
+          </button>
+        </div>
+        <p class="form-note">
+          <span class="required-star">*</span> Required. Once we receive your application
+          we'll send you an invoice and next steps. We aim to respond within 2–3 business days.
+        </p>
+      </form>
+    </div>
+
+  </div>
+</Base>

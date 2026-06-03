@@ -1,0 +1,18 @@
+links:
+  - label: Home
+    url: /
+  - label: About
+    url: /about
+  - label: Events
+    url: /events
+  - label: Directory
+    url: /directory
+  - label: Explore
+    url: /explore
+  - label: Stay
+    url: /stay
+  - label: Contact
+    url: /contact
+  - label: Join Us
+    url: /join
+    highlight: true

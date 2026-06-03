@@ -1,0 +1,130 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const listings = await getCollection('directory');
+  return listings.map(listing => ({
+    params: { slug: listing.slug },
+    props: { listing },
+  }));
+}
+
+interface Props {
+  listing: CollectionEntry<'directory'>;
+}
+const { listing } = Astro.props;
+const { Content } = await listing.render();
+---
+
+<Base
+  title={listing.data.name}
+  description={listing.data.description}
+  image={listing.data.image || undefined}
+>
+
+  <div class="page-header">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item">
+            <a href="/directory" class="text-white-50">Directory</a>
+          </li>
+          {listing.data.category && (
+            <li class="breadcrumb-item">
+              <a href={`/directory?cat=${encodeURIComponent(listing.data.category)}`}
+                 class="text-white-50">{listing.data.category}</a>
+            </li>
+          )}
+          <li class="breadcrumb-item active text-white" aria-current="page">
+            {listing.data.name}
+          </li>
+        </ol>
+      </nav>
+      <h1 class="fw-bold">{listing.data.name}</h1>
+      {listing.data.category && (
+        <span class="badge bg-white text-primary fw-semibold">{listing.data.category}</span>
+      )}
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-5">
+
+      <div class="col-lg-8">
+        {listing.data.image && (
+          <img src={listing.data.image}
+               alt={listing.data.name}
+               class="img-fluid rounded-3 shadow-sm mb-4 w-100"
+               style="max-height:400px; object-fit:cover" />
+        )}
+        {listing.data.description && (
+          <p class="lead">{listing.data.description}</p>
+        )}
+        <div class="prose mt-4">
+          <Content />
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card border-0 bg-sand rounded-3 p-4 mb-3">
+          {listing.data.logo && (
+            <img src={listing.data.logo}
+                 alt={`${listing.data.name} logo`}
+                 class="mb-3"
+                 style="max-height:64px; object-fit:contain; max-width:160px" />
+          )}
+          <h5 class="fw-semibold mb-3">{listing.data.name}</h5>
+
+          {listing.data.address && (
+            <p class="small mb-2">
+              <i class="bi bi-geo-alt text-primary me-2"></i>{listing.data.address}
+            </p>
+          )}
+          {listing.data.phone && (
+            <p class="small mb-2">
+              <i class="bi bi-telephone text-primary me-2"></i>
+              <a href={`tel:${listing.data.phone}`}>{listing.data.phone}</a>
+            </p>
+          )}
+          {listing.data.email && (
+            <p class="small mb-2">
+              <i class="bi bi-envelope text-primary me-2"></i>
+              <a href={`mailto:${listing.data.email}`}>{listing.data.email}</a>
+            </p>
+          )}
+        </div>
+
+        {(listing.data.website || listing.data.facebook || listing.data.instagram) && (
+          <div class="d-grid gap-2">
+            {listing.data.website && (
+              <a href={listing.data.website} target="_blank" rel="noopener"
+                 class="btn btn-primary">
+                <i class="bi bi-globe me-1"></i> Visit Website
+              </a>
+            )}
+            {listing.data.facebook && (
+              <a href={listing.data.facebook} target="_blank" rel="noopener"
+                 class="btn btn-outline-secondary">
+                <i class="bi bi-facebook me-1"></i> Facebook Page
+              </a>
+            )}
+            {listing.data.instagram && (
+              <a href={listing.data.instagram} target="_blank" rel="noopener"
+                 class="btn btn-outline-secondary">
+                <i class="bi bi-instagram me-1"></i> Instagram
+              </a>
+            )}
+          </div>
+        )}
+
+        <div class="mt-4">
+          <a href="/directory" class="text-muted small">
+            <i class="bi bi-arrow-left me-1"></i> Back to directory
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Base>

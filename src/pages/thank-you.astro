@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+const from = Astro.url.searchParams.get('from') || 'contact';
+const messages: Record<string, { heading: string; body: string }> = {
+  join: {
+    heading: 'Application Received!',
+    body: "Thanks for your membership application. We'll review it and send you an invoice and next steps within 2–3 business days.",
+  },
+  listing: {
+    heading: 'Listing Submitted!',
+    body: "Thanks for submitting your business listing. Our team will review it and be in touch within a few business days.",
+  },
+  contact: {
+    heading: 'Message Sent!',
+    body: "Thanks for getting in touch. We'll do our best to reply as quickly as possible — usually within 2–3 business days.",
+  },
+};
+const msg = messages[from] ?? messages.contact;
+---
+
+<Base
+  title="Thank You"
+  description="Thank you for getting in touch with Promote Waipu."
+>
+  <div class="container py-5 text-center">
+    <div class="py-5">
+      <i class="bi bi-check-circle-fill thankyou-icon mb-4 d-block"></i>
+      <h1 class="fw-bold mb-3">{msg.heading}</h1>
+      <p class="lead text-muted mb-4" style="max-width:520px; margin:0 auto">
+        {msg.body}
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-2">
+        <a href="/" class="btn btn-primary">
+          <i class="bi bi-house-fill me-1"></i> Back to Home
+        </a>
+        <a href="/events" class="btn btn-outline-primary">
+          <i class="bi bi-calendar3 me-1"></i> Upcoming Events
+        </a>
+        <a href="/explore" class="btn btn-outline-secondary">
+          <i class="bi bi-compass me-1"></i> Explore Waipu
+        </a>
+      </div>
+    </div>
+  </div>
+</Base>

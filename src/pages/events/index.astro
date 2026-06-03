@@ -1,0 +1,130 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const allEvents = await getCollection('events');
+const now = new Date();
+
+const upcoming = allEvents
+  .filter(e => e.data.published && new Date(e.data.date) >= now)
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+
+const past = allEvents
+  .filter(e => e.data.published && new Date(e.data.date) < now)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 6);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-NZ', {
+    weekday: 'short', day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+---
+
+<Base
+  title="Events"
+  description="What's on in Waipu — community events, markets, festivals and more."
+>
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="fw-bold">Events</h1>
+      <p>What's on in Waipu</p>
+    </div>
+  </div>
+
+  <div class="container py-5">
+
+    <!-- UPCOMING EVENTS -->
+    <h2 class="section-title h3">Upcoming Events</h2>
+
+    {upcoming.length === 0 ? (
+      <div class="text-center py-5">
+        <i class="bi bi-calendar-x text-primary" style="font-size:3rem"></i>
+        <p class="mt-3 text-muted">No upcoming events at the moment. Check back soon!</p>
+        <a href="https://www.facebook.com/PromoteWaipu" target="_blank" rel="noopener"
+           class="btn btn-outline-primary mt-2">
+          <i class="bi bi-facebook me-1"></i> Follow us on Facebook
+        </a>
+      </div>
+    ) : (
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+        {upcoming.map(event => (
+          <div class="col">
+            <a href={`/events/${event.slug}`}
+               class="card h-100 shadow-sm border-0 event-card rounded-3">
+              {event.data.image
+                ? <img src={event.data.image}
+                       alt={event.data.title}
+                       class="card-img-top event-card-img" />
+                : <div class="card-img-top d-flex align-items-center justify-content-center bg-sand"
+                       style="height:180px">
+                    <i class="bi bi-calendar-event text-primary" style="font-size:3rem"></i>
+                  </div>
+              }
+              <div class="card-body">
+                <p class="event-date mb-1">
+                  <i class="bi bi-calendar3 me-1"></i>
+                  {formatDate(new Date(event.data.date))}
+                </p>
+                <h5 class="card-title">{event.data.title}</h5>
+                {event.data.description && (
+                  <p class="card-text small text-muted">{event.data.description}</p>
+                )}
+              </div>
+              <div class="card-footer bg-transparent border-0 pt-0">
+                <span class="text-primary small fw-semibold">
+                  View event details <i class="bi bi-arrow-right"></i>
+                </span>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <!-- PAST EVENTS -->
+    {past.length > 0 && (
+      <div class="mt-5">
+        <h2 class="section-title h4">Past Events</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+          {past.map(event => (
+            <div class="col">
+              <a href={`/events/${event.slug}`}
+                 class="card border-0 bg-light event-card shadow-none rounded-3">
+                <div class="card-body d-flex gap-3 align-items-start">
+                  {event.data.image
+                    ? <img src={event.data.image}
+                           alt=""
+                           class="rounded-2 flex-shrink-0"
+                           style="width:72px;height:72px;object-fit:cover" />
+                    : <div class="rounded-2 flex-shrink-0 d-flex align-items-center justify-content-center bg-white border"
+                           style="width:72px;height:72px">
+                        <i class="bi bi-calendar-event text-primary fs-3"></i>
+                      </div>
+                  }
+                  <div>
+                    <p class="event-date mb-0 small">
+                      {formatDate(new Date(event.data.date))}
+                    </p>
+                    <h6 class="mb-0">{event.data.title}</h6>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+  </div>
+
+  <section class="cta-band py-4">
+    <div class="container text-center">
+      <h3 class="fw-bold mb-2">Running an Event in Waipu?</h3>
+      <p class="mb-3">Get in touch and we can help promote it to the community.</p>
+      <a href="/contact" class="btn btn-light fw-semibold">Contact Us</a>
+    </div>
+  </section>
+
+</Base>

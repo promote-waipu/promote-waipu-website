@@ -1,0 +1,117 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map(event => ({
+    params: { slug: event.slug },
+    props: { event },
+  }));
+}
+
+interface Props {
+  event: CollectionEntry<'events'>;
+}
+const { event } = Astro.props;
+const { Content } = await event.render();
+
+const dateFormatted = new Date(event.data.date).toLocaleDateString('en-NZ', {
+  weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+});
+const endDateFormatted = event.data.end_date
+  ? new Date(event.data.end_date).toLocaleDateString('en-NZ', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    })
+  : null;
+---
+
+<Base
+  title={event.data.title}
+  description={event.data.description}
+  image={event.data.image || undefined}
+>
+
+  <div class="page-header">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item">
+            <a href="/events" class="text-white-50">Events</a>
+          </li>
+          <li class="breadcrumb-item active text-white" aria-current="page">
+            {event.data.title}
+          </li>
+        </ol>
+      </nav>
+      <h1 class="fw-bold">{event.data.title}</h1>
+      <p>
+        <i class="bi bi-calendar3 me-1"></i>
+        {dateFormatted}
+        {endDateFormatted && ` — ${endDateFormatted}`}
+      </p>
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-5">
+
+      <div class="col-lg-8">
+        {event.data.image && (
+          <img src={event.data.image}
+               alt={event.data.title}
+               class="img-fluid rounded-3 shadow-sm mb-4 w-100"
+               style="max-height:420px; object-fit:cover" />
+        )}
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card border-0 bg-sand rounded-3 p-4 mb-3">
+          <h5 class="fw-semibold mb-3">Event Details</h5>
+          <p class="mb-2">
+            <i class="bi bi-calendar3 text-primary me-2"></i>
+            <strong>Date:</strong> {dateFormatted}
+          </p>
+          {endDateFormatted && (
+            <p class="mb-2">
+              <i class="bi bi-calendar3-range text-primary me-2"></i>
+              <strong>Ends:</strong> {endDateFormatted}
+            </p>
+          )}
+          {event.data.description && (
+            <p class="small text-muted mt-3 mb-0">{event.data.description}</p>
+          )}
+        </div>
+
+        {(event.data.ticket_url || event.data.external_url) && (
+          <div class="d-grid gap-2">
+            {event.data.ticket_url && (
+              <a href={event.data.ticket_url}
+                 target="_blank" rel="noopener"
+                 class="btn btn-primary">
+                <i class="bi bi-ticket-perforated me-1"></i> Get Tickets
+              </a>
+            )}
+            {event.data.external_url && (
+              <a href={event.data.external_url}
+                 target="_blank" rel="noopener"
+                 class="btn btn-outline-primary">
+                <i class="bi bi-box-arrow-up-right me-1"></i> More Information
+              </a>
+            )}
+          </div>
+        )}
+
+        <div class="mt-4">
+          <a href="/events" class="text-muted small">
+            <i class="bi bi-arrow-left me-1"></i> All events
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Base>

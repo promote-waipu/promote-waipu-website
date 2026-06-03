@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const items = await getCollection('explore');
+  return items.map(item => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: CollectionEntry<'explore'>;
+}
+const { item } = Astro.props;
+const { Content } = await item.render();
+---
+
+<Base
+  title={item.data.title}
+  description={item.data.description}
+  image={item.data.image || undefined}
+>
+
+  <div class="page-header">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item">
+            <a href="/explore" class="text-white-50">Explore</a>
+          </li>
+          <li class="breadcrumb-item active text-white" aria-current="page">
+            {item.data.title}
+          </li>
+        </ol>
+      </nav>
+      <h1 class="fw-bold">{item.data.title}</h1>
+      {item.data.category && (
+        <span class="badge bg-white text-primary fw-semibold">{item.data.category}</span>
+      )}
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-5">
+
+      <div class="col-lg-8">
+        {item.data.image && (
+          <img src={item.data.image}
+               alt={item.data.title}
+               class="img-fluid rounded-3 shadow-sm mb-4 w-100"
+               style="max-height:420px; object-fit:cover" />
+        )}
+        {item.data.description && (
+          <p class="lead">{item.data.description}</p>
+        )}
+        <div class="prose mt-4">
+          <Content />
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card border-0 bg-sand rounded-3 p-4 mb-3">
+          <h5 class="fw-semibold mb-3">Explore More</h5>
+          <a href="/explore" class="d-block footer-link text-dark mb-2">
+            <i class="bi bi-arrow-left me-1"></i> All things to do
+          </a>
+          <a href="/stay" class="d-block footer-link text-dark mb-2">
+            <i class="bi bi-house-heart me-1"></i> Places to Stay
+          </a>
+          <a href="/events" class="d-block footer-link text-dark mb-2">
+            <i class="bi bi-calendar3 me-1"></i> Upcoming Events
+          </a>
+          <a href="/directory?cat=Restaurants" class="d-block footer-link text-dark">
+            <i class="bi bi-cup-hot me-1"></i> Eat &amp; Drink
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Base>

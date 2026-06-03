@@ -1,0 +1,162 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const exploreItems = await getCollection('explore');
+const published = exploreItems
+  .filter(e => e.data.published)
+  .sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0));
+
+// Static highlights — always shown even if collection is empty
+const highlights = [
+  {
+    icon: "bi-water",
+    title: "Waipu Cove Beach",
+    description:
+      "A stunning white-sand beach backed by pohutukawa trees, ideal for swimming, surfing and family holidays. One of Northland's most beautiful beaches.",
+    href: "/explore/waipu-cove",
+  },
+  {
+    icon: "bi-geo-alt",
+    title: "Langs Beach",
+    description:
+      "A quiet, unspoiled gem of a beach just north of Waipu Cove. Walk the clifftop track between the two beaches for breathtaking Bream Bay views.",
+    href: "/explore/langs-beach",
+  },
+  {
+    icon: "bi-stars",
+    title: "Waipu Caves",
+    description:
+      "Experience the magic of glow worms in the ancient limestone caves just 20 minutes from Waipu village. A truly unique natural wonder.",
+    href: "/explore/waipu-caves",
+  },
+  {
+    icon: "bi-building-fill",
+    title: "Waipu Museum",
+    description:
+      "Explore Waipu's remarkable Scottish heritage. The Nova Scotia settlers' story is told here — a UNESCO Memory of the World registered collection.",
+    href: "/explore/waipu-museum",
+  },
+  {
+    icon: "bi-tree-fill",
+    title: "Piroa Falls",
+    description:
+      "A beautiful bush walk to a hidden waterfall on the Piroa Stream. Perfect for a cool dip on a hot day.",
+    href: "/explore/piroa-falls",
+  },
+  {
+    icon: "bi-trophy-fill",
+    title: "Highland Games",
+    description:
+      "Every New Year's Day, Waipu hosts one of the world's longest-running Highland Games. Pipe bands, caber tossing and all the Scottish traditions.",
+    href: "/explore/highland-games",
+  },
+];
+---
+
+<Base
+  title="Explore Waipu"
+  description="Discover the best things to do in Waipu, Northland — beaches, caves, walks, markets and more."
+>
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="fw-bold">Explore Waipu</h1>
+      <p>Things to do, see and discover in Waipu, Northland</p>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="py-5 bg-sand">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <h2 class="section-title h3">Waipu Has It All</h2>
+          <p class="lead">
+            From world-class beaches and ancient glow worm caves to Scottish heritage
+            festivals and the best pizza in Northland — Waipu packs an extraordinary
+            amount into a small coastal town.
+          </p>
+          <p>
+            Whether you're here for a long weekend or looking to slow down for a week,
+            there's always something to discover. Start with the essentials below.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/stay" class="btn btn-primary">
+              <i class="bi bi-house-heart me-1"></i> Find a Place to Stay
+            </a>
+            <a href="/events" class="btn btn-outline-primary">
+              <i class="bi bi-calendar3 me-1"></i> Upcoming Events
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src="/images/waipu-cove.jpg"
+               alt="Waipu Cove Beach, Northland"
+               class="img-fluid rounded-3 shadow-sm" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CMS EXPLORE ITEMS (from collection, if any) -->
+  {published.length > 0 && (
+    <section class="py-5">
+      <div class="container">
+        <h2 class="section-title h3 text-center">Featured Experiences</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          {published.map(item => (
+            <div class="col">
+              <a href={`/explore/${item.slug}`} class="explore-card">
+                {item.data.image
+                  ? <img src={item.data.image} alt={item.data.title} class="explore-card-img" />
+                  : <div class="explore-card-img bg-sand d-flex align-items-center justify-content-center">
+                      <i class="bi bi-compass text-primary" style="font-size:3rem"></i>
+                    </div>
+                }
+                <div class="explore-card-body">
+                  {item.data.category && (
+                    <span class="badge badge-category rounded-pill mb-2">{item.data.category}</span>
+                  )}
+                  <h5 class="mb-1">{item.data.title}</h5>
+                  {item.data.description && (
+                    <p class="small text-muted mb-0">{item.data.description}</p>
+                  )}
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- STATIC HIGHLIGHTS -->
+  <section class={`py-5 ${published.length > 0 ? 'bg-sand' : ''}`}>
+    <div class="container">
+      <h2 class="section-title h3 text-center">Must-Do Waipu Experiences</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1">
+        {highlights.map(h => (
+          <div class="col">
+            <div class="card h-100 border-0 shadow-sm rounded-3 p-4">
+              <i class={`bi ${h.icon} text-primary fs-2 mb-3`}></i>
+              <h5 class="fw-semibold mb-2">{h.title}</h5>
+              <p class="text-muted small mb-0">{h.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DIRECTORY CTA -->
+  <section class="cta-band py-4">
+    <div class="container text-center">
+      <h3 class="fw-bold mb-2">Find Local Businesses</h3>
+      <p class="mb-3">Cafes, restaurants, shops and services in Waipu.</p>
+      <a href="/directory" class="btn btn-light fw-semibold me-2">Browse Directory</a>
+      <a href="/stay" class="btn btn-outline-light">Places to Stay</a>
+    </div>
+  </section>
+
+</Base>
