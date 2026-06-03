@@ -1,1 +1,7 @@
 node_modules
+dist
+.astro
+
+# Raw Wix image downloads — large source files, not needed in repo
+# Curated images in public/images/ (logo, hero, etc.) ARE committed
+public/images/wix-downloads/
