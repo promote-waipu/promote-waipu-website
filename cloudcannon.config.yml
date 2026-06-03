@@ -1,0 +1,178 @@
+# CloudCannon CMS Configuration
+# Promote Waipu — promotewaipu.co.nz
+# Docs: https://cloudcannon.com/documentation/
+
+source: src
+
+# ---------------------------------------------------------------------------
+# COLLECTIONS — each is a folder of editable content files
+# ---------------------------------------------------------------------------
+collections_config:
+  pages:
+    path: pages
+    output: true
+    url: '/[slug]'
+    icon: document
+    _enabled_editors:
+      - visual
+      - content
+    schemas:
+      default:
+        path: .cloudcannon/schemas/page.md
+
+  events:
+    path: content/events
+    output: true
+    url: '/events/[slug]'
+    icon: calendar
+    name: Events
+    description: Add, edit or archive community events
+    sort:
+      key: date
+      order: desc
+    _enabled_editors:
+      - content
+    schemas:
+      default:
+        path: .cloudcannon/schemas/event.md
+
+  directory:
+    path: content/directory
+    output: true
+    url: '/directory/[slug]'
+    icon: office-building
+    name: Business Directory
+    description: Manage business and community group listings
+    sort:
+      key: name
+      order: asc
+    _enabled_editors:
+      - content
+    schemas:
+      default:
+        path: .cloudcannon/schemas/listing.md
+
+  explore:
+    path: content/explore
+    output: true
+    url: '/explore/[slug]'
+    icon: map
+    name: Explore Waipu
+    description: Local attractions and places to visit
+    _enabled_editors:
+      - content
+    schemas:
+      default:
+        path: .cloudcannon/schemas/explore.md
+
+# ---------------------------------------------------------------------------
+# DATA FILES — simple editable site settings
+# ---------------------------------------------------------------------------
+data_config:
+  navigation:
+    path: data/navigation.yml
+    name: Navigation Menu
+  site_settings:
+    path: data/site-settings.yml
+    name: Site Settings
+
+# ---------------------------------------------------------------------------
+# GLOBAL INPUT DEFAULTS — controls how fields render in the editor
+# ---------------------------------------------------------------------------
+_inputs:
+  title:
+    type: text
+    label: Page Title
+  description:
+    type: textarea
+    label: Short Description (used for SEO and cards)
+  body:
+    type: markdown
+    label: Page Content
+    options:
+      bold: true
+      italic: true
+      link: true
+      bulletedlist: true
+      numberedlist: true
+      image: true
+      table: true
+      undo: true
+      redo: true
+  date:
+    type: date
+    label: Event Date
+  end_date:
+    type: date
+    label: Event End Date (optional)
+  image:
+    type: image
+    label: Main Image
+    options:
+      width: 1200
+      height: 630
+  category:
+    type: select
+    label: Directory Category
+    options:
+      values:
+        - Accommodation
+        - Automotive
+        - Bakery & Cafe
+        - Bars & Pubs
+        - Beauty
+        - Building & Construction
+        - Clothing & Fashion
+        - Coaching
+        - Community Groups
+        - Education
+        - Engineering
+        - Excavator Hire
+        - Florist
+        - Gift Shop
+        - Glazier
+        - Golf Club
+        - Grocers & Supermarkets
+        - Hairdresser
+        - Hardware
+        - Health & Wellbeing
+        - Jewellers
+        - Landscapers & Nursery
+        - Lawyers
+        - Liquor Store
+        - Local Food Producer
+        - Manufacturers
+        - Massage
+        - Museum
+        - Pharmacy
+        - Professional Services
+        - Radio
+        - Real Estate Agents
+        - Rest Home
+        - Restaurants
+        - Second Hand Shops
+        - Sports & Recreation
+        - Trades
+        - Venues
+        - Vet
+        - Yoga
+  featured:
+    type: checkbox
+    label: Featured listing (appears highlighted)
+  published:
+    type: checkbox
+    label: Published (uncheck to hide without deleting)
+
+# ---------------------------------------------------------------------------
+# EDITOR — visual editor panel settings
+# ---------------------------------------------------------------------------
+editor:
+  default_path: /
+
+# ---------------------------------------------------------------------------
+# FILE UPLOADS
+# ---------------------------------------------------------------------------
+uploads:
+  paths:
+    uploads: public/images/uploads
+  image_size_attributes: true

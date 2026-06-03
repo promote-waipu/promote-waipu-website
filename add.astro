@@ -1,0 +1,199 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Add Your Business Listing"
+  description="Add your Waipu business or community group to the Promote Waipu directory. Basic listings are free."
+>
+
+  <div class="page-hero page-hero--short">
+    <h1>Add Your Business</h1>
+    <p>Get listed in the Waipu Business &amp; Community Directory</p>
+  </div>
+
+  <div class="container section">
+
+    <div class="listing-intro">
+      <h2>Directory Listings</h2>
+      <div class="pricing-cards">
+        <div class="pricing-card pricing-card--free">
+          <h3>Free Listing</h3>
+          <p class="price">$0</p>
+          <ul>
+            <li>Business name</li>
+            <li>Category</li>
+            <li>Phone number</li>
+            <li>Email address</li>
+            <li>Basic description</li>
+          </ul>
+          <p class="pricing-note">Available to all Waipu-based businesses and non-profit groups.</p>
+        </div>
+        <div class="pricing-card pricing-card--member">
+          <h3>Member Listing</h3>
+          <p class="price">Included with <a href="/join">$60 membership</a></p>
+          <ul>
+            <li>Everything in Free, plus:</li>
+            <li>Logo displayed</li>
+            <li>Website &amp; Facebook links</li>
+            <li>Up to 3 photos</li>
+            <li>Extended description</li>
+            <li>Featured in category</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!--
+      Formspree form — replace YOUR_LISTING_FORM_ID.
+      Create a separate Formspree form for listings so submissions are easy to manage.
+      Submissions emailed to secretary@promotewaipu.co.nz
+    -->
+    <form
+      action="https://formspree.io/f/YOUR_LISTING_FORM_ID"
+      method="POST"
+      class="form listing-form"
+      enctype="multipart/form-data"
+    >
+      <h2>Your Details</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contact_name">Contact Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="contact_name" name="contact_name" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="contact_email">Contact Email <span aria-hidden="true">*</span></label>
+          <input type="email" id="contact_email" name="contact_email" required autocomplete="email" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contact_phone">Phone</label>
+          <input type="tel" id="contact_phone" name="contact_phone" autocomplete="tel" />
+        </div>
+        <div class="form-group">
+          <label for="listing_type">Listing Type <span aria-hidden="true">*</span></label>
+          <select id="listing_type" name="listing_type" required>
+            <option value="">— Select —</option>
+            <option value="Free listing">Free listing</option>
+            <option value="Member listing ($60 membership)">Member listing ($60 membership)</option>
+            <option value="Non-profit / community group (free)">Non-profit / community group (free)</option>
+          </select>
+        </div>
+      </div>
+
+      <h2>Business Information</h2>
+
+      <div class="form-group">
+        <label for="business_name">Business / Organisation Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="business_name" name="business_name" required />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="category">Category <span aria-hidden="true">*</span></label>
+          <select id="category" name="category" required>
+            <option value="">— Select category —</option>
+            <option>Accommodation</option>
+            <option>Automotive</option>
+            <option>Bakery &amp; Cafe</option>
+            <option>Bars &amp; Pubs</option>
+            <option>Beauty</option>
+            <option>Building &amp; Construction</option>
+            <option>Clothing &amp; Fashion</option>
+            <option>Coaching</option>
+            <option>Community Groups</option>
+            <option>Education</option>
+            <option>Engineering</option>
+            <option>Florist</option>
+            <option>Gift Shop</option>
+            <option>Golf Club</option>
+            <option>Grocers &amp; Supermarkets</option>
+            <option>Hairdresser</option>
+            <option>Hardware</option>
+            <option>Health &amp; Wellbeing</option>
+            <option>Jewellers</option>
+            <option>Landscapers &amp; Nursery</option>
+            <option>Legal Services</option>
+            <option>Liquor Store</option>
+            <option>Local Food Producer</option>
+            <option>Manufacturers</option>
+            <option>Massage</option>
+            <option>Museum</option>
+            <option>Pharmacy</option>
+            <option>Professional Services</option>
+            <option>Real Estate Agents</option>
+            <option>Restaurants</option>
+            <option>Rest Home</option>
+            <option>Second Hand Shops</option>
+            <option>Sports &amp; Recreation</option>
+            <option>Trades</option>
+            <option>Venues</option>
+            <option>Vet</option>
+            <option>Yoga</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="gst_number">GST Number (if applicable)</label>
+          <input type="text" id="gst_number" name="gst_number" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Street Address</label>
+        <input type="text" id="address" name="address" autocomplete="street-address" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Business Description <span aria-hidden="true">*</span></label>
+        <textarea id="description" name="description" rows="5" required
+          placeholder="Tell us about your business — what you offer, your hours, what makes you special..."></textarea>
+      </div>
+
+      <h2>Online Presence</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="website">Website URL</label>
+          <input type="url" id="website" name="website" placeholder="https://" />
+        </div>
+        <div class="form-group">
+          <label for="facebook">Facebook Page URL</label>
+          <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/..." />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="instagram">Instagram URL (optional)</label>
+        <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/..." />
+      </div>
+
+      <div class="form-group">
+        <label for="logo">Logo (optional — PNG or JPG, max 2MB)</label>
+        <input type="file" id="logo" name="logo" accept="image/png,image/jpeg" />
+        <p class="field-note">Member listings only. We'll contact you if we need a higher resolution version.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Anything else you'd like to tell us?</label>
+        <textarea id="message" name="message" rows="3"></textarea>
+      </div>
+
+      <!-- Honeypot -->
+      <input type="text" name="_gotcha" style="display:none" />
+      <input type="hidden" name="_next" value="https://www.promotewaipu.co.nz/thank-you?from=listing" />
+      <input type="hidden" name="_subject" value="New business listing submission — Promote Waipu" />
+
+      <button type="submit" class="btn btn-primary">Submit Listing</button>
+
+      <p class="form-note">
+        * Required fields. Listings are reviewed by the Promote Waipu committee before going live.
+        We'll be in touch within a few business days.
+      </p>
+
+    </form>
+  </div>
+</Base>

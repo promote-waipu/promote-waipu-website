@@ -1,0 +1,149 @@
+---
+# Base Layout — wraps every page
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{Astro.props.title ? `${Astro.props.title} | Promote Waipu` : 'Promote Waipu — Waipu, Northland, New Zealand'}</title>
+  <meta name="description" content={Astro.props.description || 'Promote Waipu is a non-profit community group promoting the beautiful town of Waipu, Northland, New Zealand.'} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={Astro.props.title || 'Promote Waipu'} />
+  <meta property="og:description" content={Astro.props.description || 'Promoting the beautiful town of Waipu, Northland, New Zealand.'} />
+  <meta property="og:image" content={Astro.props.image || '/images/og-default.jpg'} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Promote Waipu" />
+
+  <!-- Geo tags for local SEO -->
+  <meta name="geo.region" content="NZ-NTL" />
+  <meta name="geo.placename" content="Waipu, Northland, New Zealand" />
+  <meta name="geo.position" content="-35.9847;174.4472" />
+  <meta name="ICBM" content="-35.9847, 174.4472" />
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Promote Waipu",
+      "alternateName": "Waipu Business and Community Inc",
+      "url": "https://www.promotewaipu.co.nz",
+      "logo": "https://www.promotewaipu.co.nz/images/promote-waipu-logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "hello@promotewaipu.co.nz",
+        "contactType": "customer service"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Waipu, Northland, New Zealand"
+      },
+      "sameAs": ["https://www.facebook.com/PromoteWaipu"]
+    }
+  </script>
+
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">
+        <img src="/images/promote-waipu-logo.png" alt="Promote Waipu — Waipu, Northland, New Zealand" width="220" height="53" />
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li class="has-dropdown">
+            <a href="/events">Events</a>
+            <ul class="dropdown">
+              <li><a href="/events/highland-games">Highland Games</a></li>
+              <li><a href="/events/christmas-parade">Christmas Parade</a></li>
+              <li><a href="/events/winter-festival">Winter Festival</a></li>
+              <li><a href="/events/street-market">Street Markets</a></li>
+            </ul>
+          </li>
+          <li class="has-dropdown">
+            <a href="/directory">Directory</a>
+            <ul class="dropdown">
+              <li><a href="/directory?cat=accommodation">Accommodation</a></li>
+              <li><a href="/directory?cat=eat-drink">Eat &amp; Drink</a></li>
+              <li><a href="/directory?cat=shop">Shop</a></li>
+              <li><a href="/directory?cat=trades">Trades &amp; Services</a></li>
+              <li><a href="/directory?cat=community">Community Groups</a></li>
+              <li><a href="/directory">All Categories →</a></li>
+            </ul>
+          </li>
+          <li><a href="/explore">Explore</a></li>
+          <li><a href="/stay">Stay</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/join" class="btn-nav">Join Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="/images/promote-waipu-logo-white.png" alt="Promote Waipu" width="180" />
+        <p>A non-profit community group promoting Waipu, Northland, New Zealand.</p>
+        <a href="https://www.facebook.com/PromoteWaipu" target="_blank" rel="noopener" aria-label="Facebook">
+          <img src="/images/icons/facebook.svg" alt="Facebook" width="28" />
+        </a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/explore">Things to Do</a></li>
+          <li><a href="/stay">Places to Stay</a></li>
+          <li><a href="/directory?cat=eat-drink">Eat &amp; Drink</a></li>
+          <li><a href="/events">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/join">Join / Membership</a></li>
+          <li><a href="/directory/add">Add Your Business</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-subscribe">
+        <h4>Stay in the Loop</h4>
+        <p>Get Waipu news and event updates.</p>
+        <!-- Replace with your Mailchimp embed code -->
+        <form action="MAILCHIMP_FORM_ACTION" method="post" class="subscribe-form">
+          <input type="email" name="EMAIL" placeholder="your@email.com" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; {new Date().getFullYear()} Waipu Business &amp; Community Inc. All rights reserved.</p>
+      <p><a href="/privacy">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('.main-nav').classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>

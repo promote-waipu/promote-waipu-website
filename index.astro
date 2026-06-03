@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const events = await getCollection('events');
+const upcomingEvents = events
+  .filter(e => e.data.published && new Date(e.data.date) >= new Date())
+  .sort((a, b) => new Date(a.data.date) - new Date(b.data.date))
+  .slice(0, 3);
+---
+
+<Base
+  title="Waipu, Northland New Zealand — Things to Do, Eat, Stay & Explore"
+  description="Promote Waipu is a non-profit community group promoting the beautiful coastal town of Waipu, Northland, New Zealand. Discover events, local businesses, beaches and more."
+>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-image">
+      <img src="/images/hero-waipu-cove.jpg" alt="Waipu Cove beach, Northland New Zealand" />
+    </div>
+    <div class="hero-content">
+      <h1>Welcome to Waipu</h1>
+      <p>90 minutes north of Auckland · Stunning beaches · Rich Scottish heritage · Community heart</p>
+      <div class="hero-ctas">
+        <a href="/explore" class="btn btn-primary">Explore Waipu</a>
+        <a href="/events" class="btn btn-secondary">Upcoming Events</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK LINKS -->
+  <section class="quick-links container">
+    <a href="/directory?cat=eat-drink" class="quick-link">
+      <img src="/images/icons/eat.svg" alt="" />
+      <span>Eat &amp; Drink</span>
+    </a>
+    <a href="/stay" class="quick-link">
+      <img src="/images/icons/stay.svg" alt="" />
+      <span>Stay</span>
+    </a>
+    <a href="/directory?cat=shop" class="quick-link">
+      <img src="/images/icons/shop.svg" alt="" />
+      <span>Shop</span>
+    </a>
+    <a href="/explore" class="quick-link">
+      <img src="/images/icons/explore.svg" alt="" />
+      <span>Explore</span>
+    </a>
+    <a href="/events" class="quick-link">
+      <img src="/images/icons/events.svg" alt="" />
+      <span>Events</span>
+    </a>
+    <a href="/directory" class="quick-link">
+      <img src="/images/icons/directory.svg" alt="" />
+      <span>Directory</span>
+    </a>
+  </section>
+
+  <!-- ABOUT WAIPU -->
+  <section class="about-waipu container section">
+    <div class="about-text">
+      <h2>Discover Waipu</h2>
+      <p>
+        Just 90 minutes north of Auckland and 30 minutes south of Whangarei, Waipu sits on one of 
+        the most stunning coastlines in New Zealand. With its friendly community, iconic beaches, 
+        award-winning food and rich Scottish heritage, Waipu is one of Northland's best kept secrets.
+      </p>
+      <p>
+        Waipu is home to the UNESCO heritage listed Waipu Museum, the world-famous Waipu Caves 
+        glow worm experience, and the spectacular Waipu to Langs Beach clifftop walk.
+      </p>
+      <a href="/explore" class="btn btn-outline">Explore the Area →</a>
+    </div>
+    <div class="about-image">
+      <img src="/images/waipu-village.jpg" alt="Waipu village, Northland New Zealand" />
+    </div>
+  </section>
+
+  <!-- UPCOMING EVENTS -->
+  {upcomingEvents.length > 0 && (
+    <section class="events-preview section">
+      <div class="container">
+        <h2>Upcoming Events</h2>
+        <div class="event-cards">
+          {upcomingEvents.map(event => (
+            <a href={`/events/${event.slug}`} class="event-card">
+              {event.data.image && <img src={event.data.image} alt={event.data.title} />}
+              <div class="event-card-body">
+                <p class="event-date">{new Date(event.data.date).toLocaleDateString('en-NZ', { day:'numeric', month:'long', year:'numeric' })}</p>
+                <h3>{event.data.title}</h3>
+                <p>{event.data.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+        <a href="/events" class="btn btn-outline">All Events →</a>
+      </div>
+    </section>
+  )}
+
+  <!-- PROMOTE WAIPU CTA -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>Love Waipu? So Do We.</h2>
+      <p>
+        Promote Waipu is a non-profit community group. All proceeds from membership go directly 
+        back into the Waipu community. Get your business listed — basic listings are free.
+      </p>
+      <div class="cta-buttons">
+        <a href="/join" class="btn btn-primary">Become a Member</a>
+        <a href="/directory/add" class="btn btn-secondary">Add Your Business</a>
+      </div>
+    </div>
+  </section>
+
+</Base>

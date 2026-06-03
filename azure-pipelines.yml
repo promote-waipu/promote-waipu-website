@@ -1,0 +1,47 @@
+# Azure Pipelines — Promote Waipu
+# Builds the Astro static site and deploys to Azure Static Web Apps
+# on every push to the main branch.
+#
+# Setup:
+#   1. Create an Azure Static Web App in the Azure portal
+#   2. Copy the deployment token from the Static Web App resource
+#   3. Add it as a pipeline variable named AZURE_STATIC_WEB_APPS_API_TOKEN
+#      (mark it as secret)
+
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  NODE_VERSION: '20.x'
+
+steps:
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: $(NODE_VERSION)
+    displayName: 'Install Node.js'
+
+  - script: npm ci
+    displayName: 'Install dependencies'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+  - script: npm run build
+    displayName: 'Build Astro site'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+  - task: AzureStaticWebApp@0
+    displayName: 'Deploy to Azure Static Web Apps'
+    inputs:
+      app_location: '/'
+      output_location: 'dist'
+      azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN)
+
+  # Optional: run a quick smoke test after deploy
+  # - script: |
+  #     curl -f https://www.promotewaipu.co.nz || exit 1
+  #   displayName: 'Smoke test'

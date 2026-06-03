@@ -1,0 +1,138 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Join Promote Waipu"
+  description="Become a member of Promote Waipu and support the Waipu community. Business and community memberships available from $30."
+>
+
+  <div class="page-hero page-hero--short">
+    <h1>Join Promote Waipu</h1>
+    <p>Support the community — and get your business noticed</p>
+  </div>
+
+  <div class="container section">
+
+    <div class="join-intro two-col">
+      <div>
+        <h2>Why Join?</h2>
+        <p>
+          Promote Waipu is a non-profit group with all proceeds fed directly back into the 
+          Waipu community. Our committee is made up of passionate business people and local 
+          residents with a strong community spirit.
+        </p>
+        <p>Membership gives you:</p>
+        <ul class="benefits-list">
+          <li>Invitations to social and networking events</li>
+          <li>A listing in our web directory</li>
+          <li>Inclusion in our printed visitor map</li>
+          <li>Opportunities to promote your business in our newsletter and social media</li>
+          <li>Ability to host an After 5 networking event</li>
+          <li>The knowledge your contribution supports community events</li>
+        </ul>
+        <p>
+          Questions? Email <a href="mailto:hello@promotewaipu.co.nz">hello@promotewaipu.co.nz</a>
+        </p>
+      </div>
+      <div class="membership-tiers">
+        <div class="tier-card">
+          <h3>Community Member</h3>
+          <p class="price">$30 <span>incl. GST / year</span></p>
+          <p>Annual membership. Invites to networking events. Contributes to community events.</p>
+        </div>
+        <div class="tier-card tier-card--featured">
+          <h3>Business Member</h3>
+          <p class="price">$60 <span>incl. GST / year</span></p>
+          <p>Annual membership + full directory listing with logo, links and photos.</p>
+        </div>
+        <div class="tier-card">
+          <h3>Donation</h3>
+          <p class="price">Any amount</p>
+          <p>Support the community without a formal membership. Every bit helps.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBERSHIP FORM (Formspree) -->
+    <form
+      action="https://formspree.io/f/YOUR_JOIN_FORM_ID"
+      method="POST"
+      class="form join-form"
+    >
+      <h2>Membership Application</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address <span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" />
+        </div>
+        <div class="form-group">
+          <label for="membership_type">Membership Type <span aria-hidden="true">*</span></label>
+          <select id="membership_type" name="membership_type" required>
+            <option value="">— Select —</option>
+            <option value="Community Member ($30)">Community Member ($30)</option>
+            <option value="Business Member ($60)">Business Member ($60)</option>
+            <option value="Donation">Donation (amount in message)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" id="business-fields">
+        <label for="business_name">Business Name (if applicable)</label>
+        <input type="text" id="business_name" name="business_name" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" name="address" autocomplete="street-address" />
+        </div>
+        <div class="form-group">
+          <label for="gst">GST Number (business members)</label>
+          <input type="text" id="gst" name="gst_number" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="website">Website</label>
+          <input type="url" id="website" name="website" placeholder="https://" />
+        </div>
+        <div class="form-group">
+          <label for="facebook">Facebook</label>
+          <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/..." />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Anything else you'd like to tell us?</label>
+        <textarea id="message" name="message" rows="3"></textarea>
+      </div>
+
+      <!-- Honeypot -->
+      <input type="text" name="_gotcha" style="display:none" />
+      <input type="hidden" name="_next" value="https://www.promotewaipu.co.nz/thank-you?from=join" />
+      <input type="hidden" name="_subject" value="New membership application — Promote Waipu" />
+
+      <button type="submit" class="btn btn-primary">Submit Application</button>
+
+      <p class="form-note">
+        * Required. Once we receive your application we'll send you an invoice and next steps.
+        We aim to respond within 2–3 business days.
+      </p>
+    </form>
+
+  </div>
+</Base>
