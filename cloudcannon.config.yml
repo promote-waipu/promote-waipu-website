@@ -2,6 +2,9 @@
 # Promote Waipu — promotewaipu.co.nz
 # Docs: https://cloudcannon.com/documentation/
 
+# Only show explicitly defined collections — prevents CloudCannon auto-detecting src/pages/ etc.
+collections_config_override: true
+
 # ---------------------------------------------------------------------------
 # COLLECTIONS — each is a folder of editable content files
 # ---------------------------------------------------------------------------
