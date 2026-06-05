@@ -1,140 +1,121 @@
-# CloudCannon CMS Configuration
-# Promote Waipu — promotewaipu.co.nz
-# Docs: https://cloudcannon.com/documentation/
-
-# Only show explicitly defined collections — prevents CloudCannon auto-detecting src/pages/ etc.
-collections_config_override: true
-
-# ---------------------------------------------------------------------------
-# COLLECTIONS — each is a folder of editable content files
-# ---------------------------------------------------------------------------
 collections_config:
   events:
     path: src/content/events
-    output: true
-    url: '/events/[slug]'
-    icon: calendar
     name: Events
+    icon: calendar
+    url: /events/[slug]
+    disable_url: false
     description: Add, edit or archive community events
     sort:
       key: date
       order: desc
     _enabled_editors:
       - content
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
     schemas:
       default:
         path: .cloudcannon/schemas/event.md
-    _preview:
-      text:
-        - key: title
-      subtext:
-        - key: date
-      image:
-        - key: image
-      icon: calendar
-
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
   directory:
     path: src/content/directory
-    output: true
-    url: '/directory/[slug]'
-    icon: office-building
     name: Business Directory
+    icon: office-building
+    url: /directory/[slug]
+    disable_url: false
     description: Manage business and community group listings
     sort:
       key: name
       order: asc
     _enabled_editors:
       - content
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
     schemas:
       default:
         path: .cloudcannon/schemas/listing.md
-    _preview:
-      text:
-        - key: name
-      subtext:
-        - key: category
-      image:
-        - key: image
-        - key: logo
-      icon: office-building
-
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
   explore:
     path: src/content/explore
-    output: true
-    url: '/explore/[slug]'
-    icon: map
     name: Explore Waipu
+    icon: map
+    url: /explore/[slug]
+    disable_url: false
     description: Local attractions and places to visit
     _enabled_editors:
       - content
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
     schemas:
       default:
         path: .cloudcannon/schemas/explore.md
-    _preview:
-      text:
-        - key: title
-      subtext:
-        - key: category
-      image:
-        - key: image
-      icon: map
-
-# ---------------------------------------------------------------------------
-# DATA FILES — simple editable site settings
-# ---------------------------------------------------------------------------
-data_config:
-  navigation:
-    path: src/data/navigation.yml
-    name: Navigation Menu
-  site_settings:
-    path: src/data/site-settings.yml
-    name: Site Settings
-  homepage:
-    path: src/data/homepage.json
-    name: Homepage Content
-  about:
-    path: src/data/about.json
-    name: About Page Content
-
-# ---------------------------------------------------------------------------
-# GLOBAL INPUT DEFAULTS — controls how fields render in the editor
-# ---------------------------------------------------------------------------
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+  data:
+    path: src/data
+    icon: data_usage
+    disable_url: false
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
 _inputs:
   title:
     type: text
     label: Page Title
+    cascade: true
   description:
     type: textarea
     label: Short Description (used for SEO and cards)
+    cascade: true
   body:
     type: markdown
-    label: Page Content
     options:
+      allow_resize: true
+      allow_custom_markup: false
+      remove_custom_markup: false
+      initial_height: 320
       bold: true
+      bulletedlist: true
+      image: true
+      image_size_attributes: true
       italic: true
       link: true
-      bulletedlist: true
       numberedlist: true
-      image: true
+      redo: true
       table: true
       undo: true
-      redo: true
+    label: Page Content
+    cascade: true
   date:
     type: date
     label: Event Date
+    cascade: true
   end_date:
     type: date
     label: Event End Date (optional)
+    cascade: true
   image:
     type: image
-    label: Main Image
     options:
       width: 1200
       height: 630
+    label: Main Image
+    cascade: true
   category:
     type: select
-    label: Directory Category
     options:
+      allow_empty: true
       values:
         - Accommodation
         - Automotive
@@ -176,80 +157,105 @@ _inputs:
         - Venues
         - Vet
         - Yoga
+    label: Directory Category
+    cascade: true
   featured:
     type: checkbox
     label: Featured listing (appears highlighted)
+    cascade: true
   published:
     type: checkbox
     label: Published (uncheck to hide without deleting)
-
-  # Homepage data fields
+    cascade: true
   seo_title:
     type: text
     label: SEO Page Title
+    cascade: true
   seo_description:
     type: textarea
     label: SEO Description (shown in Google search results)
+    cascade: true
   hero_heading:
     type: text
     label: Hero Heading
+    cascade: true
   hero_tagline:
     type: textarea
     label: Hero Tagline (the line under the heading)
+    cascade: true
   discover_heading:
     type: text
     label: Section Heading
+    cascade: true
   discover_lead:
     type: textarea
     label: Lead Paragraph (larger text)
+    cascade: true
   discover_body:
     type: textarea
     label: Body Paragraph
+    cascade: true
   cta_heading:
     type: text
     label: Call-to-Action Heading
+    cascade: true
   cta_body:
     type: textarea
     label: Call-to-Action Body Text
-
-  # About page data fields
+    cascade: true
   page_heading:
     type: text
     label: Page Heading
+    cascade: true
   page_subheading:
     type: text
     label: Page Subheading
+    cascade: true
   who_heading:
     type: text
     label: Section Heading
+    cascade: true
   who_lead:
     type: textarea
     label: Lead Paragraph (larger text)
+    cascade: true
   who_body:
     type: textarea
     label: Body Text (press Enter twice between paragraphs)
+    cascade: true
   contact_email:
     type: email
     label: Secretary Email Address
+    cascade: true
   community_heading:
     type: text
     label: Section Heading
+    cascade: true
   community_lead:
     type: textarea
     label: Lead Paragraph (larger text)
+    cascade: true
   community_body:
     type: textarea
     label: Body Text (press Enter twice between paragraphs)
-
-# ---------------------------------------------------------------------------
-# EDITOR — visual editor panel settings
-# ---------------------------------------------------------------------------
+    cascade: true
+data_config:
+  navigation:
+    path: src/data/navigation.yml
+    name: Navigation Menu
+  site_settings:
+    path: src/data/site-settings.yml
+    name: Site Settings
+  homepage:
+    path: src/data/homepage.json
+    name: Homepage Content
+  about:
+    path: src/data/about.json
+    name: About Page Content
 editor:
   default_path: /
-
-# ---------------------------------------------------------------------------
-# FILE UPLOADS
-# ---------------------------------------------------------------------------
+timezone: Etc/UTC
+collections_config_override: true
 uploads:
   paths:
     uploads: public/images/uploads
