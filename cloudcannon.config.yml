@@ -24,6 +24,14 @@ collections_config:
     schemas:
       default:
         path: .cloudcannon/schemas/event.md
+    _preview:
+      text:
+        - key: title
+      subtext:
+        - key: date
+      image:
+        - key: image
+      icon: calendar
 
   directory:
     path: src/content/directory
@@ -40,6 +48,15 @@ collections_config:
     schemas:
       default:
         path: .cloudcannon/schemas/listing.md
+    _preview:
+      text:
+        - key: name
+      subtext:
+        - key: category
+      image:
+        - key: image
+        - key: logo
+      icon: office-building
 
   explore:
     path: src/content/explore
@@ -53,6 +70,14 @@ collections_config:
     schemas:
       default:
         path: .cloudcannon/schemas/explore.md
+    _preview:
+      text:
+        - key: title
+      subtext:
+        - key: category
+      image:
+        - key: image
+      icon: map
 
 # ---------------------------------------------------------------------------
 # DATA FILES — simple editable site settings
