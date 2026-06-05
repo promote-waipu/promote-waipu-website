@@ -64,6 +64,12 @@ data_config:
   site_settings:
     path: src/data/site-settings.yml
     name: Site Settings
+  homepage:
+    path: src/data/homepage.json
+    name: Homepage Content
+  about:
+    path: src/data/about.json
+    name: About Page Content
 
 # ---------------------------------------------------------------------------
 # GLOBAL INPUT DEFAULTS — controls how fields render in the editor
@@ -151,6 +157,64 @@ _inputs:
   published:
     type: checkbox
     label: Published (uncheck to hide without deleting)
+
+  # Homepage data fields
+  seo_title:
+    type: text
+    label: SEO Page Title
+  seo_description:
+    type: textarea
+    label: SEO Description (shown in Google search results)
+  hero_heading:
+    type: text
+    label: Hero Heading
+  hero_tagline:
+    type: textarea
+    label: Hero Tagline (the line under the heading)
+  discover_heading:
+    type: text
+    label: Section Heading
+  discover_lead:
+    type: textarea
+    label: Lead Paragraph (larger text)
+  discover_body:
+    type: textarea
+    label: Body Paragraph
+  cta_heading:
+    type: text
+    label: Call-to-Action Heading
+  cta_body:
+    type: textarea
+    label: Call-to-Action Body Text
+
+  # About page data fields
+  page_heading:
+    type: text
+    label: Page Heading
+  page_subheading:
+    type: text
+    label: Page Subheading
+  who_heading:
+    type: text
+    label: Section Heading
+  who_lead:
+    type: textarea
+    label: Lead Paragraph (larger text)
+  who_body:
+    type: textarea
+    label: Body Text (press Enter twice between paragraphs)
+  contact_email:
+    type: email
+    label: Secretary Email Address
+  community_heading:
+    type: text
+    label: Section Heading
+  community_lead:
+    type: textarea
+    label: Lead Paragraph (larger text)
+  community_body:
+    type: textarea
+    label: Body Text (press Enter twice between paragraphs)
 
 # ---------------------------------------------------------------------------
 # EDITOR — visual editor panel settings
