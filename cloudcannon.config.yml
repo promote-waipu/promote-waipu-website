@@ -2,14 +2,12 @@
 # Promote Waipu — promotewaipu.co.nz
 # Docs: https://cloudcannon.com/documentation/
 
-source: src
-
 # ---------------------------------------------------------------------------
 # COLLECTIONS — each is a folder of editable content files
 # ---------------------------------------------------------------------------
 collections_config:
   events:
-    path: content/events
+    path: src/content/events
     output: true
     url: '/events/[slug]'
     icon: calendar
@@ -25,7 +23,7 @@ collections_config:
         path: .cloudcannon/schemas/event.md
 
   directory:
-    path: content/directory
+    path: src/content/directory
     output: true
     url: '/directory/[slug]'
     icon: office-building
@@ -41,7 +39,7 @@ collections_config:
         path: .cloudcannon/schemas/listing.md
 
   explore:
-    path: content/explore
+    path: src/content/explore
     output: true
     url: '/explore/[slug]'
     icon: map
@@ -58,10 +56,10 @@ collections_config:
 # ---------------------------------------------------------------------------
 data_config:
   navigation:
-    path: data/navigation.yml
+    path: src/data/navigation.yml
     name: Navigation Menu
   site_settings:
-    path: data/site-settings.yml
+    path: src/data/site-settings.yml
     name: Site Settings
 
 # ---------------------------------------------------------------------------
@@ -163,4 +161,5 @@ editor:
 uploads:
   paths:
     uploads: public/images/uploads
+  dam_uploads: public/images/uploads
   image_size_attributes: true
